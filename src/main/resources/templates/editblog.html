@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/main.html">
+<div layout:fragment = "contentPart">
+
+    <div class="card" >
+        <div class="card-header">
+            <h4 class="card-title">Редактировать запись</h4>
+        </div>
+
+        <form th:action = "@{/editblog}" method="post">
+            <input type="hidden" name="id" th:value="${editblog.id}">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Загаловок</label>
+                    <input type="text" class="form-control"  name = "title" th:value="${editblog.title}">
+                </div>
+                <div class="form-group">
+                    <label for="content">Описания</label>
+                    <textarea class="form-control" id="content" name="content" rows="3" th:value="${editblog.content}" th:text="${editblog.content}"></textarea>
+                </div>
+                <div>
+                    <label for="cat">Категория </label>
+                    <select name="category" class="form-group" id="cat">
+                        <option th:each = "c:${categoryeditblog}" th:value="${c.id}" th:text="${c.name}" th:selected="${c.id==editblog.category.id}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success">Сохранить</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row m-2">
+        <div class="col">
+            <a class="button btn-primary btn-sm" th:href = "@{'/details/' + ${editblog.id}}"><i class="fa fa-reply"></i> Отмена</a>
+        </div>
+        <div class="col text-right">
+            <form th:action = "@{'/deleteblog'}" method="post">
+                <input type="hidden" th:value = "${editblog.id}" name="id">
+                <button class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i></button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</html>

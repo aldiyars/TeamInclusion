@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/main.html">
+<div layout:fragment = "contentPart">
+    <div class="card">
+        <img class="card-img-top"  src="img/img1.svg" alt="Card image cap">
+        <div class="card-body">
+                <h3 class="card-title" th:text = "${detailsblog.title}"></h3>
+                <p class="card-text" th:text = "${detailsblog.content}"></p>
+            </div>
+            <div class="card-footer metablog">
+                <span class="fa fa-user"> Author: </span>
+                <span th:text = "${detailsblog.user.first_name}"></span> <span th:text = "${detailsblog.user.last_name}"></span>
+                <br>
+                <span class="fa fa-folder-open-o"> Category: </span>
+                <span th:text = "${detailsblog.category.name}"></span>
+                <br>
+                <span class="fa fa-calendar"> Created ad: </span>
+                <span th:text = "${#dates.format(detailsblog.post_date, 'dd-MM-yyyy')}"></span>
+            </div>
+    </div>
+    <div class="row m-2">
+        <div class="col">
+            <a class="button btn-primary btn-sm" th:href = "@{'/blog'}"><i class="fa fa-reply"></i> Назад</a>
+        </div>
+        <div class="row">
+            <div class="col text-right">
+                <a th:href = "@{'/editblog/' + ${detailsblog.id}}">
+                    <button class="btn btn-secondary btn-sm"><i class="fa fa-pencil-square-o"></i>   </button>
+                </a>
+                <form th:action = "@{'/deleteblog'}" method="post">
+                    <input type="hidden" th:value = "${detailsblog.id}" name="id">
+                    <button class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

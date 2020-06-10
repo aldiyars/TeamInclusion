@@ -29,7 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         builder.userDetailsService(userService);
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Date;
 
+@Table(name = "t_blog")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "t_news")
-public class News {
+public class Blog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,15 +26,15 @@ public class News {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "content")
+    private String content;
 
-    @Column(name = "create")
-    private Date create;
+    @Column(name = "post_date")
+    private Date post_date;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Users user;
 }

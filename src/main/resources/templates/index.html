@@ -4,7 +4,7 @@
 <div layout:fragment = "contentPart">
 
 
-        <form th:action = "@{/add}" method="post">
+        <form th:action = "@{/addcat}" method="post">
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control" name = "name">
@@ -19,18 +19,14 @@
                     ID
                 </th>
                 <th>
-                    Login
-                </th>
-                <th>
-                    NIC
+                    Name
                 </th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each = "u:${users}">
-                <td th:text = "${u.id}"></td>
-                <td th:text = "${u.email}"></td>
-                <td th:text = "${u.password}"></td>
+            <tr th:each = "c:${category}">
+                <td th:text = "${c.id}"></td>
+                <td th:text = "${c.name}"></td>
             </tr>
             </tbody>
         </table>

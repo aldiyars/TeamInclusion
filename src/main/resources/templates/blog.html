@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/main.html">
+<div layout:fragment = "contentPart">
+    <div class="card">
+        <form th:action = "@{/createblog}" method="post" enctype="multipart/form-data">
+            <div class="card-header">
+                <h4 class="card-title"><b>Добавить запись</b></h4>
+            </div>
+            <div class="card-body">
+                <input type="hidden" name="user" th:value="${userid.id}">
+                <div class="form-group">
+                    <label>Загаловок</label>
+                    <input type="text" class="form-control"  name = "title" required>
+                </div>
+                <div class="form-group">
+                    <label for="desc">Описания</label>
+                    <textarea  class="form-control" name = "desc" id="desc" rows="3" required></textarea>
+                </div>
+                <div>
+                    <label for="cat">Категория </label>
+                    <select name="category" class="form-group" id="cat">
+                        <option th:each = "c: ${cat}"  th:text="${c.name}" th:value = "${c.id}"/></option>
+                    </select>
+                </div>
+                <div>
+                    <input type="file" name="file">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Создать</button>
+            </div>
+        </form>
+    </div>
+    <br>
+
+<!--    Poster-->
+    <div class="row">
+        <div class="col d-inline">
+            <div th:each = "c:${blog}" class="card mb-5">
+                <div>
+                    <img class="card-img-top"  src="/uploads/${c.image}" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text = "${c.title}"></h5>
+                    <p class="card-text" th:text = "${c.content}"></p>
+                    <a th:href = "@{'/details/' + ${c.id}}" class="btn btn-primary btn-sm">Подробнее</a>
+                </div>
+                <div class="card-footer metablog">
+
+                    <span class="fa fa-user"> Author: </span>
+                    <span th:text = "${c.user.first_name}"></span> <span th:text = "${c.user.last_name}"></span>
+                    <br>
+                    <span class="fa fa-folder-open-o"> Category: </span>
+                    <span th:text = "${c.category.name}"></span>
+                    <br>
+                    <span class="fa fa-calendar"> Created ad: </span>
+                    <span th:text = "${#dates.format(c.post_date, 'dd-MM-yyyy')}"></span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</html>

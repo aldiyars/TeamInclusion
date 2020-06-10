@@ -30,10 +30,10 @@ public class Users {
     private String sur_name;
 
     @Column(name = "iin")
-    private int iin;
+    private Long iin;
 
     @Column(name = "tel")
-    private int tel;
+    private Long tel;
 
     @Column(name = "email")
     private String email;
@@ -41,7 +41,7 @@ public class Users {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Roles roles;
 
 

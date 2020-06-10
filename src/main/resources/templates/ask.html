@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/main.html">
+<div layout:fragment = "contentPart">
+
+    <div class="card">
+        <form th:action = "@{/createQuestion}" method="post">
+            <div class="card-header">
+                <h4 class="card-title"><b>Сұрақ қою</b></h4>
+            </div>
+            <div class="card-body">
+                <input type="hidden" name="user" th:value="${thisuserid.id}">
+                <div class="form-group">
+                    <label>Сұрақтың нақты бөлігін осында жазыңыз: </label>
+                    <input type="text" class="form-control"  name = "title" required minlength="10">
+                </div>
+                <div class="form-group">
+                    <label for="desc">Сұрақ туралы толық ақпарат осында түсінікті етіп жазыңыз:</label>
+                    <textarea  class="form-control" name = "desc" id="desc" rows="3" required minlength="15"></textarea>
+                </div>
+                <div>
+                    <label for="cat">Сұрақтың санаты: </label>
+                    <select name="qacategory" class="form-group" id="cat">
+                        <option selected>Категория таңдаңыз</option>
+                        <option th:each = "c: ${qacategories}"  th:text="${c.name}" th:value="${c.id}"/></option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"> Создать</i></button>
+            </div>
+        </form>
+    </div>
+
+    <br>
+    <!--    all Questions-->
+    <!--    <div class="row">-->
+    <!--        <div class="col d-inline">-->
+    <!--            <div th:each = "c:${allQuestions}" class="card mb-5">-->
+    <!--                <div class="card-body">-->
+    <!--                    <h5 class="card-title" th:text = "${c.question_title}"></h5>-->
+    <!--                    <a th:href = "@{'/question/' + ${c.id}}" class="btn btn-primary btn-sm">Подробнее</a>-->
+    <!--                </div>-->
+    <!--                <div class="card-footer metablog">-->
+    <!--                    <span class="fa fa-user"> Author: </span>-->
+    <!--                    <span th:text = "${c.users.first_name}"></span> <span th:text = "${c.users.last_name}"></span>-->
+    <!--                    <br>-->
+    <!--                    <span class="fa fa-folder-open-o"> Category: </span>-->
+    <!--                    <span th:text = "${c.categories.name}"></span>-->
+    <!--                    <br>-->
+    <!--                    <span class="fa fa-calendar"> Created ad: </span>-->
+    <!--                    <span th:text = "${#dates.format(c.created_at, 'dd-MM-yyyy')}"></span>-->
+
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+
+
+</div>
+</html>

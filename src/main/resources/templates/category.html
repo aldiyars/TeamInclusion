@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/main.html">
+<div layout:fragment = "contentPart">
+
+
+    <form th:action = "@{/createcategory}" method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name = "name">
+        </div>
+        <button type="submit" class="btn btn-primary">ADD</button>
+    </form>
+    <br>
+    <table cellpadding="20" class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "c:${category}">
+            <td th:text = "${c.id}"></td>
+            <td th:text = "${c.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+</html>
